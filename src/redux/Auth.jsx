@@ -11,26 +11,20 @@ export const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-        // Login
-        loginUserLoading: state => {
+        siginUserLoading: state => {
             state.isLoading = true;
         },
-        loginUserSuccsess: state => {},
-        loginUserFailure: state => {},
-        // Register
-        registerUserLoading: state => {
-            state.isLoading = true;
-        },
-        registerUserSuccsess: state => {
+        siginUserSuccsess: (state, action) => {
             state.isLoading = false;
             state.loggedIn = true;
+            state.user = action.payload
         },
-        registerUserFailure: state => {
+        siginUserFailure: (state, action) => {
             state.isLoading = false;
-            state.error = 'Error'
+            state.error = action.payload
         },
     }
 })
 
-export const {loginUserLoading, registerUserLoading, registerUserSuccsess, registerUserFailure} = authSlice.actions;
+export const {siginUserLoading, siginUserSuccsess, siginUserFailure} = authSlice.actions;
 export default authSlice.reducer;

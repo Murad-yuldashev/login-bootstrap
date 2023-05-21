@@ -3,9 +3,9 @@ import icon from "../assets/logo.png";
 import { Input } from "../UI";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  registerUserFailure,
-  registerUserLoading,
-  registerUserSuccsess,
+  siginUserFailure,
+  siginUserLoading,
+  siginUserSuccsess,
 } from "../../redux/Auth";
 import AuthService from "../../service/auth";
 
@@ -29,19 +29,16 @@ const Registrasiya = () => {
 
   const dispatch = useDispatch();
   const { isLoading } = useSelector((state) => state.auth);
-  console.log(isLoading, 'Loading');
 
-  const handleClick = async (e) => {
+  const registerhandleClick = async (e) => {
     e.preventDefault();
-    dispatch(registerUserLoading());
+    dispatch(siginUserLoading());
     const user = {username: name, email, password};
     try {
       const response = await AuthService.userRegister(user);
-      console.log(user);
-      console.log(response.data);
-      dispatch(registerUserSuccsess());
-    } catch {
-      dispatch(registerUserFailure());
+      dispatch(siginUserSuccsess(response.user));
+    } catch(error) {
+      dispatch(siginUserFailure(error.response.data.errors));
     }
   };
 
@@ -74,7 +71,7 @@ const Registrasiya = () => {
           />
 
           <button
-            onClick={handleClick}
+            onClick={registerhandleClick}
             disabled={isLoading}
             className="w-100 btn btn-lg btn-primary mt-3"
             type="submit"

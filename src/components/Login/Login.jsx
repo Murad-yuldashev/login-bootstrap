@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import icon from "../assets/logo.png";
 import { Input } from "../UI";
 import { useDispatch, useSelector } from "react-redux";
-import { loginUserLoading } from "../../redux/Auth";
+import { siginUserFailure, siginUserLoading, siginUserSuccsess } from "../../redux/Auth";
+import AuthService from "../../service/auth";
 
 const Login = () => {
 
@@ -14,7 +15,7 @@ const Login = () => {
     email: "",
     password: "",
   });
-  const { name, email, password } = infoInput;
+  const { email, password } = infoInput;
 
   const infoData = (e) => {
     setInfoInput((prev) => {
@@ -25,9 +26,16 @@ const Login = () => {
     });
   };
 
-  const handleClick = (e) => {
+  const loginhandleClick = async (e) => {
     e.preventDefault();
-    dispatch(loginUserLoading())
+    dispatch(siginUserLoading());
+    const user = {email, password};
+    try {
+      const response = await AuthService.userLogin(user);
+      dispatch(siginUserSuccsess(response.user));
+    } catch(error) {
+      dispatch(siginUserFailure(error.response.data.errors));
+    }
   }
 
   return (
@@ -52,7 +60,7 @@ const Login = () => {
             label={"Password"}
           />
 
-          <button onClick={handleClick} disabled={isLoading} className="w-100 btn btn-lg btn-primary mt-3" type="submit">
+          <button onClick={loginhandleClick} disabled={isLoading} className="w-100 btn btn-lg btn-primary mt-3" type="submit">
             {isLoading ? 'Loading...' : 'Login'}
           </button>
         </form>
