@@ -1,14 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import icon from "../assets/logo.png";
 import { Input } from "../UI";
 import { useDispatch, useSelector } from "react-redux";
 import { siginUserFailure, siginUserLoading, siginUserSuccsess } from "../../redux/Auth";
 import AuthService from "../../service/auth";
+import {ValidationError} from "../index";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
 
+  const navigate = useNavigate()
+
   const dispatch = useDispatch();
-  const {isLoading} = useSelector(state => state.auth);
+  const {isLoading, loggedIn} = useSelector(state => state.auth);
   console.log(isLoading, 'dddd');
   const [infoInput, setInfoInput] = useState({
     name: "",
@@ -33,10 +37,17 @@ const Login = () => {
     try {
       const response = await AuthService.userLogin(user);
       dispatch(siginUserSuccsess(response.user));
+      navigate('/')
     } catch(error) {
       dispatch(siginUserFailure(error.response.data.errors));
     }
   }
+
+  useEffect(() => {
+    if(loggedIn) {
+      navigate('/')
+    }
+  }, [])
 
   return (
     <section className="text-center mt-5">
@@ -44,6 +55,7 @@ const Login = () => {
         <form>
           <img className="mb-4" src={icon} alt="" width="78" height="78" />
           <h1 className="h3 mb-3 fw-normal">Please Login</h1>
+          <ValidationError />
 
           <Input
             infoData={infoData}
