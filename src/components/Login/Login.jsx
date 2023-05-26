@@ -13,7 +13,6 @@ const Login = () => {
 
   const dispatch = useDispatch();
   const {isLoading, loggedIn} = useSelector(state => state.auth);
-  console.log(isLoading, 'dddd');
   const [infoInput, setInfoInput] = useState({
     name: "",
     email: "",
@@ -47,7 +46,7 @@ const Login = () => {
     if(loggedIn) {
       navigate('/')
     }
-  }, [])
+  }, [loggedIn])
 
   return (
     <section className="text-center mt-5">

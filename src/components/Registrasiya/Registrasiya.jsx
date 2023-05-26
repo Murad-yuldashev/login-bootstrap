@@ -47,7 +47,7 @@ const Registrasiya = () => {
     if(loggedIn) {
       navigate('/')
     }
-  }, [])
+  }, [loggedIn])
 
   return (
     <section className="text-center mt-5">
