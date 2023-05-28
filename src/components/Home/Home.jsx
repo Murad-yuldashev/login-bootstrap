@@ -1,9 +1,10 @@
 import React from 'react';
+import Article from '../Article/Article';
 
 const Home = () => {
     return (
         <div>
-            Home Main
+            <Article />
         </div>
     );
 }

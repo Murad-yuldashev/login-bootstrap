@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import icon from "../assets/logo.png";
 import { Input } from "../UI";
 import { useDispatch, useSelector } from "react-redux";
-import { siginUserFailure, siginUserLoading, siginUserSuccsess } from "../../redux/Auth";
+import { siginUserFailure, siginUserLoading, siginUserSuccsess } from "../../slice/Auth";
 import AuthService from "../../service/auth";
 import {ValidationError} from "../index";
 import { useNavigate } from "react-router-dom";

@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
 import { useDispatch, useSelector } from "react-redux";
 import { removeItem } from "../../helpers/Persistence-storage";
-import { logoutUser } from "../../redux/Auth";
+import { logoutUser } from "../../slice/Auth";
 
 const Navbar = () => {
   const { loggedIn, user } = useSelector((state) => state.auth);

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import icon from "../assets/logo.png";
 import { Input } from "../UI";
-import { siginUserFailure, siginUserLoading, siginUserSuccsess, } from "../../redux/Auth";
+import { siginUserFailure, siginUserLoading, siginUserSuccsess, } from "../../slice/Auth";
 import { useDispatch, useSelector } from "react-redux";
 import AuthService from "../../service/auth";
 import {ValidationError} from "../index";

@@ -3,8 +3,10 @@ import {Home, Login, Navbar, Registrasiya} from './components/index';
 import AuthService from './service/auth';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { siginUserSuccsess } from './redux/Auth';
+import { siginUserSuccsess } from './slice/Auth';
 import { getItem } from './helpers/Persistence-storage';
+import ArticleService from './service/articlesservice';
+import { getArticleLoading, getArticleSuccess } from './slice/Article';
 
 function App() {
 
@@ -19,11 +21,22 @@ function App() {
     }
   }
 
+  const getArticles = async () => {
+    dispatch(getArticleLoading())
+    try {
+      const dataArticles = await ArticleService.getArticles()
+      dispatch(getArticleSuccess(dataArticles.articles));
+    } catch(error) {
+      console.log('Error get Articles');
+    }
+  }
+
   useEffect(() => {
     const token = getItem('token');
     if(token){
       getUser()
     }
+    getArticles()
   }, [])
 
   return (
