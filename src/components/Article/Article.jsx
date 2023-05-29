@@ -2,16 +2,18 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { Spinner } from '../UI';
 import { getArticleLoading } from '../../slice/Article';
+import { useNavigate } from 'react-router-dom';
 
 const Article = () => {
 
+    const navigate = useNavigate()
     const { article, isLoading } = useSelector(state => state.article);
     console.log(isLoading, 'Loading');
 
     return (
         <div className="album py-5 ">
             {isLoading && <Spinner />}
-            <div className="container">
+            <div>
                 <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                     {article.map(item => (
                         <div key={item.id} className="col">
@@ -23,7 +25,7 @@ const Article = () => {
                                 </div>
                                 <div className="card-footer d-flex justify-content-between align-items-center">
                                     <div className="btn-group">
-                                    <button type="button" className="btn btn-sm btn-outline-success">View</button>
+                                    <button onClick={() => navigate(`/article/${item.slug}`)} type="button" className="btn btn-sm btn-outline-success">View</button>
                                     <button type="button" className="btn btn-sm btn-outline-secondary">Edit</button>
                                     <button type="button" className="btn btn-sm btn-outline-danger">Delete</button>
                                     </div>
