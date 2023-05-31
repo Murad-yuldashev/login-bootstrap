@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import { ArticleDetail, Home, Login, Navbar, Registrasiya } from "./components/index";
+import { ArticleDetail, CreateArticle, Home, Login, Navbar, Registrasiya } from "./components/index";
 import AuthService from "./service/auth";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
@@ -20,22 +20,12 @@ function App() {
     }
   };
 
-  const getArticles = async () => {
-    dispatch(getArticleLoading());
-    try {
-      const dataArticles = await ArticleService.getArticles();
-      dispatch(getArticleSuccess(dataArticles.articles));
-    } catch (error) {
-      console.log("Error get Articles");
-    }
-  };
 
   useEffect(() => {
     const token = getItem("token");
     if (token) {
       getUser();
     }
-    getArticles();
   }, []);
 
   return (
@@ -47,6 +37,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Registrasiya />} />
           <Route path="/article/:slug" element={<ArticleDetail />} />
+          <Route path="/create-article" element={<CreateArticle />} />
         </Routes>
       </div>
     </main>

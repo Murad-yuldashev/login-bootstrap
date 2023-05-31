@@ -24,17 +24,20 @@ const Navbar = () => {
       <nav className="mt-2 d-inline-flex mt-md-0 ms-md-auto">
         {loggedIn ? (
           <>
-            <Link to="/login" className="me-3 py-2 text-dark text-decoration-none fs-4" href="#">
+            <Link to="/login" className="me-3 py-2 text-dark text-decoration-none fs-4">
               {user.username}
+            </Link>
+            <Link to="/create-article" className="me-3 py-2 text-dark text-decoration-none fs-4">
+              Create-Article
             </Link>
             <button onClick={logout} className="btn btn-outline-danger m-0">Logout</button>
           </>
         ) : (
           <>
-            <Link to="/login" className="me-3 py-2 text-dark text-decoration-none fs-4" href="#">
+            <Link to="/login" className="me-3 py-2 text-dark text-decoration-none fs-4">
               Login
             </Link>
-            <Link to="/register" className="me-3 py-2 text-dark text-decoration-none fs-4" href="#">
+            <Link to="/register" className="me-3 py-2 text-dark text-decoration-none fs-4">
               Register
             </Link>
           </>
