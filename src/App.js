@@ -5,8 +5,6 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { siginUserSuccsess } from "./slice/Auth";
 import { getItem } from "./helpers/Persistence-storage";
-import ArticleService from "./service/articlesservice";
-import { getArticleLoading, getArticleSuccess } from "./slice/Article";
 
 function App() {
   const dispatch = useDispatch();
